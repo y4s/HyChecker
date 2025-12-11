@@ -1,6 +1,8 @@
 # HyChecker
 HyChecker is a Python script that allows you to check avaiable usernames for the game [Hytale](hytale.com) by [Hypixel Studios](x.com/hypixel).
 
+Download the latest version of the script [here](https://github.com/y4s/HyChecker/releases/tag/HyChecker).
+
 ---
 
 ### ⚠️ Dependencies:

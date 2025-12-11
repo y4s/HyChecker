@@ -18,5 +18,5 @@ HyChecker is a Python script that allows you to check avaiable usernames for the
 
 ❗If you have any question feel free to DM me on Discord @yeson
 
-This script was made possible due to http://hytl.tools's public API made by @jackgamesftw
+This script was made possible due to http://hytl.tools 's public API made by @jackgamesftw
 Credit: https://x.com/jackgamesftw

@@ -11,6 +11,7 @@ Download the latest version of the script [here](https://github.com/y4s/HyChecke
 > 2. Python's requests module <br>
 
 #### ⬇️ Windows Terminal Installation for Python's Requests Module
+<i>open the terminal, copy and enter the following:</i>
 ```
 pip install requests
 ```

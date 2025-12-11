@@ -5,9 +5,10 @@ Download the latest version of the script [here](https://github.com/y4s/HyChecke
 
 ---
 
-### ⚠️ Dependencies:
-1. VSCode/Python
-2. Python's requests module <br>
+> [!IMPORTANT]
+> Dependencies Required:
+> 1. [VSCode](https://code.visualstudio.com/) / [Python](https://www.python.org/downloads/)
+> 2. Python's requests module <br>
 
 #### ⬇️ Windows Terminal Installation for Python's Requests Module
 ```

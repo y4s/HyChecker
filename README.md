@@ -5,7 +5,7 @@ Download the latest version of the script [here](https://github.com/y4s/HyChecke
 
 ---
 
-> [!IMPORTANT]
+> [!WARNING]
 > Dependencies Required:
 > 1. [VSCode](https://code.visualstudio.com/) / [Python](https://www.python.org/downloads/)
 > 2. Python's requests module <br>

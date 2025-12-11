@@ -27,9 +27,10 @@ python -m pip install requests
 
 ### 🔍 How To Use:
 1. Create a new folder 
-2. Place **hychecker.py** & **name.txt** in the new folder you created
-3. Modify **name.txt** by entering the names you're after (examples are given within the file itself)
-4. Run **hychecker.py**
+2. Place **hychecker.py**, **name.txt** & **refresh.py** in the new folder you created
+3. Open the folder you created on VSCode, your folder should contain **hychecker.py**, **name.txt** & **refresh.py** 
+4. Modify **name.txt** by entering the names you're after (examples are given within the file itself)
+5. Run **hychecker.py**
 
 > ✅ If ran correctly, the files: <i>available_names.txt</i>, <i>unavailable_names.txt</i> and <i>name_checked.txt</i> should appear
 

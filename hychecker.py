@@ -112,10 +112,11 @@ def main():
         with open(UNAVAILABLE_FILE, "w", encoding="utf-8") as f:
             f.write("\n".join(sorted(unavailable_names)) + "\n")
 
-    print(f"\n✔ Done! Updated files:")
-    print(f"- {OUTPUT_FILE} (full list)")
-    print(f"- {AVAILABLE_FILE} (available names)")
-    print(f"- {UNAVAILABLE_FILE} (unavailable names)")
+    print(f"\n💠 [DONE]")
+    print(f"\n> Updated files:")
+    print(f"- {OUTPUT_FILE} (Full List)")
+    print(f"- {AVAILABLE_FILE} (Available)")
+    print(f"- {UNAVAILABLE_FILE} (Unavailable)")
 
 if __name__ == "__main__":
     main()

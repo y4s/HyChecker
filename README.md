@@ -1,5 +1,5 @@
 # HyChecker
-HyChecker is a Python script that allows you to check avaiable usernames for the game [Hytale](hytale.com) by [Hypixel Studios](x.com/hypixel).
+HyChecker is a Python script that allows you to check avaiable usernames for the game [Hytale](https://hytale.com) by [Hypixel Studios](https://x.com/hypixel).
 
 Download the latest version of the script [here](https://github.com/y4s/HyChecker/releases/tag/HyChecker).
 
@@ -42,4 +42,4 @@ python -m pip install requests
 > If you have any question feel free to DM me on Discord `@yeson`
 
 > [!IMPORTANT]
-> This script was made possible due to [hytl.tools](http://hytl.tools)' public API made by [@jackgamesftw](x.com/jackgamesftw)
+> This script was made possible due to [hytl.tools](https://hytl.tools)' public API made by [@jackgamesftw](https://x.com/jackgamesftw)

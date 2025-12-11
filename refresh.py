@@ -65,13 +65,13 @@ def main():
         is_avail = check_name_api(name)
         if is_avail is True:
             still_available.append(name)
-            print(" → ✔️ (still available)")
+            print(" → (still available) ✔️")
         elif is_avail is False:
             # move to unavailable
             if name not in unavailable_set:
                 unavailable_set.add(name)
                 moved_to_unavailable.append(name)
-            print(" → ❌ (moved to unavailable)")
+            print(" → (moved to unavailable) ❌")
         else:
             # on error: keep the name in available list to try later
             still_available.append(name)
@@ -85,8 +85,8 @@ def main():
     # Summary
     print("\nSummary:")
     print(f"  Checked: {len(available)}")
-    print(f"  Still available: {len(still_available)}")
-    print(f"  Moved to unavailable: {len(moved_to_unavailable)}")
+    print(f"  Still available: {len(still_available)} ✔️")
+    print(f"  Moved to unavailable: {len(moved_to_unavailable)} ❌")
     if moved_to_unavailable:
         print("  Names moved:")
         for n in moved_to_unavailable:

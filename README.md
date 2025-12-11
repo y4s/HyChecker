@@ -13,7 +13,7 @@ HyChecker is a Python script that allows you to check avaiable usernames for the
 > 2. Python's Requests Module <br>
 
 #### ⬇️ Windows Terminal Installation for Python's Requests Module
-<i>Open the terminal, copy and enter the following:</i>
+<i>Open the terminal, copy & enter the following:</i>
 ```
 pip install requests
 ```
@@ -28,7 +28,7 @@ python -m pip install requests
 ### 🔍 How To Use:
 1. Create a new folder 
 2. Place `hychecker.py`, `name.txt` & `refresh.py` in the new folder you created
-3. Open the folder you created in VSCode, your folder should contain the following files: `hychecker.py`, `name.txt` & `refresh.py` 
+3. Open the folder you created in **VSCode**, your folder should contain the following files: `hychecker.py`, `name.txt` & `refresh.py` 
 4. Modify `name.txt` by entering the usernames you're after & save the file <i>(examples are given within the file itself)</i>
 5. Run `hychecker.py`
 

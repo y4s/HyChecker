@@ -1,4 +1,4 @@
-<img width="180" height="180" alt="Group 31 (2)" src="https://github.com/user-attachments/assets/56ad96f3-1d63-4f82-a8e5-ccf501cbbcaa" />
+<img width="160" height="160" alt="Group 31 (2)" src="https://github.com/user-attachments/assets/56ad96f3-1d63-4f82-a8e5-ccf501cbbcaa" />
 
 # HyChecker
 HyChecker is a Python script that allows you to check avaiable usernames for the game [Hytale](https://hytale.com) by [Hypixel Studios](https://x.com/hypixel).

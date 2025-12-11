@@ -1,3 +1,5 @@
+<img width="180" height="180" alt="Group 31 (2)" src="https://github.com/user-attachments/assets/56ad96f3-1d63-4f82-a8e5-ccf501cbbcaa" />
+
 # HyChecker
 HyChecker is a Python script that allows you to check avaiable usernames for the game [Hytale](https://hytale.com) by [Hypixel Studios](https://x.com/hypixel).
 
@@ -42,4 +44,5 @@ python -m pip install requests
 > If you have any question feel free to DM me on Discord `@yeson`
 
 > [!IMPORTANT]
-> This script was made possible due to [hytl.tools](https://hytl.tools)' public API made by [@jackgamesftw](https://x.com/jackgamesftw)
+> This script was made possible due to [hytl.tools](https://hytl.tools)' public API made by [@jackgamesftw](https://x.com/jackgamesftw) <br>
+> The logo was made by myself, using an artwork made by an Artist @ [Hytale](https://hytale.com)

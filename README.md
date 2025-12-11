@@ -28,7 +28,7 @@ python -m pip install requests
 ### 🔍 How To Use:
 1. Create a new folder 
 2. Place `hychecker.py`, `name.txt` & `refresh.py` in the new folder you created
-3. Open the folder you created in **VSCode**, your folder should contain the following files: `hychecker.py`, `name.txt` & `refresh.py` 
+3. Open the folder you created in **VSCode**, your folder should contain: `hychecker.py`, `name.txt` & `refresh.py` 
 4. Modify `name.txt` by entering the usernames you're after & save the file <i>(examples are given within the file itself)</i>
 5. Run `hychecker.py`
 

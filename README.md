@@ -39,7 +39,7 @@ python -m pip install requests
 #### VSCode Folder <br>
 <img width="172" height="134" alt="image" src="https://github.com/user-attachments/assets/6b605715-ca1d-4e05-97af-6fdf50bd36a4" />
 
-#### Search Output <br>
+#### Search Summary <br>
 <img width="235" height="222" alt="image" src="https://github.com/user-attachments/assets/62c3e38e-690f-4f34-a550-b6bb5dd4a4c6" />
 
 

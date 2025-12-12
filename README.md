@@ -63,8 +63,8 @@ python -m pip install requests
 > If you have any question feel free to DM me on Discord: `@yeson`
 
 > [!IMPORTANT]
-> This script was made possible due to [hytl.tools](https://hytl.tools)' public API made by [@JackGamesFTW](https://x.com/JackGamesFTW). <br>
-> The logo was made by myself, using an artwork designed by the artists at Hytale.
+> - This script was made possible due to [hytl.tools](https://hytl.tools)' public API made by [@JackGamesFTW](https://x.com/JackGamesFTW). <br>
+> - The logo was made by myself, using an artwork designed by the artists at Hytale.
 
 > [!CAUTION]
 > This is an Unofficial tool, not affiliated with [Hytale](https://hytale.com).

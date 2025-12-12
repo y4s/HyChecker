@@ -34,10 +34,21 @@ python -m pip install requests
 
 > If ran correctly, the files: <i>available_names.txt</i>, <i>unavailable_names.txt</i> and <i>name_checked.txt</i> should appear
 
+#### VSCode Folder <br>
+<img width="172" height="134" alt="image" src="https://github.com/user-attachments/assets/6b605715-ca1d-4e05-97af-6fdf50bd36a4" />
+
+#### Search Output <br>
+<img width="235" height="222" alt="image" src="https://github.com/user-attachments/assets/62c3e38e-690f-4f34-a550-b6bb5dd4a4c6" />
+
+
 ### 💡 Optional:
 1. Run `refresh.py` to see if the names you're after are still available
 
 > When ran, the list of names that are still available will remain in <i>available_names.txt</i>, otherwise moved to <i>unavailable_names.txt</i>
+
+#### Refresh Summary <br>
+<img width="211" height="155" alt="image" src="https://github.com/user-attachments/assets/ded92eb7-427c-44fb-9505-f7d41a5761e7" />
+
 
 ---
 

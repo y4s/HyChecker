@@ -11,7 +11,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 AVAILABLE_FILE = os.path.join(SCRIPT_DIR, "available_names.txt")
 UNAVAILABLE_FILE = os.path.join(SCRIPT_DIR, "unavailable_names.txt")
 TIMEOUT = 6
-DELAY_BETWEEN = 0.25  # polite delay to avoid hammering the API
+DELAY_BETWEEN = 0.25  # polite delay
 
 def load_set(path):
     """Load lines from a file into a set (stripped, non-empty)."""
@@ -29,20 +29,57 @@ def write_atomic(path, lines):
     os.replace(tmp, path)
 
 def check_name_api(name):
-    """Return True if available, False if unavailable, or None on error."""
-    try:
-        resp = requests.get(API_URL.format(name), timeout=TIMEOUT)
-        if resp.status_code != 200:
-            print(f"  → API error {resp.status_code} for '{name}'")
-            return None
-        data = resp.json()
-        return bool(data.get("available"))
-    except requests.exceptions.RequestException as e:
-        print(f"  → Network error for '{name}': {e}")
-        return None
-    except ValueError:
-        print(f"  → Invalid JSON response for '{name}'")
-        return None
+    """
+    Return True if available, False if unavailable.
+    Handles rate limits (429) by waiting and retrying indefinitely.
+    Returns None only on unrecoverable errors.
+    """
+
+    retries = 0
+    max_retries = 999999  # effectively unlimited
+
+    while retries < max_retries:
+        try:
+            resp = requests.get(API_URL.format(name), timeout=TIMEOUT)
+
+            # RATE LIMITED
+            if resp.status_code == 429:
+                retry_after = resp.headers.get("Retry-After")
+                if retry_after and retry_after.isdigit():
+                    wait_time = int(retry_after)
+                else:
+                    wait_time = 30  # fallback to known limit
+
+                print(f" → Rate limited for '{name}'. Waiting {wait_time}s...")
+                time.sleep(wait_time)
+                retries += 1
+                continue
+
+            # OTHER NON-200 CODES
+            if resp.status_code != 200:
+                print(f" → API error {resp.status_code} for '{name}' — retrying in 3s")
+                retries += 1
+                time.sleep(3)
+                continue
+
+            # Parse response
+            data = resp.json()
+            return bool(data.get("available"))
+
+        except requests.exceptions.RequestException as e:
+            print(f" → Network error for '{name}': {e} — retrying in 5s")
+            retries += 1
+            time.sleep(5)
+            continue
+
+        except ValueError:
+            print(f" → Invalid JSON for '{name}' — retrying in 3s")
+            retries += 1
+            time.sleep(3)
+            continue
+
+    # Never really hits this because of infinite retries
+    return None
 
 def main():
     if not os.path.exists(AVAILABLE_FILE):
@@ -63,22 +100,24 @@ def main():
     for idx, name in enumerate(available, start=1):
         print(f"{idx}/{len(available)}: {name}", end="")
         is_avail = check_name_api(name)
+
         if is_avail is True:
             still_available.append(name)
             print(" → (still available) ✔️")
+
         elif is_avail is False:
-            # move to unavailable
             if name not in unavailable_set:
                 unavailable_set.add(name)
                 moved_to_unavailable.append(name)
             print(" → (moved to unavailable) ❌")
+
         else:
-            # on error: keep the name in available list to try later
             still_available.append(name)
-            print(" → check error, kept for later")
+            print(" → error, kept for retry later")
+
         time.sleep(DELAY_BETWEEN)
 
-    # Write updated files
+    # Save results
     write_atomic(AVAILABLE_FILE, sorted(still_available))
     write_atomic(UNAVAILABLE_FILE, sorted(unavailable_set))
 
@@ -87,6 +126,7 @@ def main():
     print(f"  Checked: {len(available)}")
     print(f"  Still available: {len(still_available)} ✔️")
     print(f"  Moved to unavailable: {len(moved_to_unavailable)} ❌")
+
     if moved_to_unavailable:
         print("  Names moved:")
         for n in moved_to_unavailable:

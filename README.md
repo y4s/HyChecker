@@ -32,21 +32,26 @@ python -m pip install requests
 4. Modify `name.txt` by entering the usernames you're after & save the file <i>(examples are given within the file itself)</i>
 5. Run `hychecker.py`
 
-> ✅ If ran correctly, the files: <i>available_names.txt</i>, <i>unavailable_names.txt</i> and <i>name_checked.txt</i> should appear
+> If ran correctly, the files: <i>available_names.txt</i>, <i>unavailable_names.txt</i> and <i>name_checked.txt</i> should appear
 
 ### 💡 Optional:
 1. Run `refresh.py` to see if the names you're after are still available
 
-> ✅ When ran, the list of names that are still available will remain in <i>available_names.txt</i>, otherwise moved to <i>unavailable_names.txt</i>
+> When ran, the list of names that are still available will remain in <i>available_names.txt</i>, otherwise moved to <i>unavailable_names.txt</i>
+
+---
+
+> [!TIP]
+> The more names you add into your list, the longer it will take to search. This script is highly dependant on the API's ability to check for availability, and since I did NOT make the API, please use this tool with a grain of salt.
 
 ---
 
 > [!NOTE]
-> If you have any question feel free to DM me on Discord `@yeson`
+> If you have any question feel free to DM me on Discord: `@yeson`
 
 > [!IMPORTANT]
-> This script was made possible due to [hytl.tools](https://hytl.tools)' public API made by [@JackGamesFTW](https://x.com/JackGamesFTW) <br>
-> The logo was made by myself, using an artwork made by the artists at Hytale
+> This script was made possible due to [hytl.tools](https://hytl.tools)' public API made by [@JackGamesFTW](https://x.com/JackGamesFTW). <br>
+> The logo was made by myself, using an artwork made by the artists at Hytale.
 
 > [!CAUTION]
-> This is an Unofficial tool, not affiliated with [Hytale](https://hytale.com)
+> This is an Unofficial tool, not affiliated with [Hytale](https://hytale.com).

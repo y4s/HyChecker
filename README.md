@@ -5,7 +5,7 @@ HyChecker is a Python script that allows you to check availability of multiple u
 
 ---
 
-> **Download** the latest version of HyChecker [here](https://github.com/y4s/HyChecker/releases/tag/HyChecker).
+> **Download** the latest version of HyChecker [here](https://github.com/y4s/HyChecker/releases/tag/HyCheckerV1.1).
 
 ---
 

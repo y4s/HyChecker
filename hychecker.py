@@ -26,16 +26,34 @@ def normalize_name(name):
 
 def check_name(name):
     """Check availability of a username via the API."""
+    headers = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
+        ),
+        "Accept": "application/json, text/plain, */*",
+        "Referer": "https://hytl.tools/",
+        "Origin": "https://hytl.tools"
+    }
+
     try:
-        response = requests.get(API_URL.format(name.strip()), timeout=5)
+        response = requests.get(
+            API_URL.format(name.strip()),
+            headers=headers,
+            timeout=5
+        )
+
         if response.status_code == 200:
             data = response.json()
-            if data.get("available"):
-                return "✔️"
-            else:
-                return "❌"
+            return "✔️" if data.get("available") else "❌"
+
+        elif response.status_code == 403:
+            return "error 403 (blocked)"
+
         else:
             return f"error {response.status_code}"
+
     except requests.exceptions.RequestException as e:
         return f"error {e}"
 

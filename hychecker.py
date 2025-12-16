@@ -20,54 +20,24 @@ UNAVAILABLE_FILE = os.path.join(SCRIPT_DIR, "unavailable_names.txt")
 def normalize_name(name):
     """Normalize username: lowercase, remove spaces/dashes, keep only a-z, 0-9, underscore."""
     name = name.replace(" ", "").replace("-", "").lower()
-    return re.sub(r"[^a-z0-9_]", "", name)
+    # Keep only letters, digits, and underscore
+    name = re.sub(r"[^a-z0-9_]", "", name)
+    return name
 
-def check_name(name, max_retries=5):
-    """Check availability of a username via the API with retry/backoff handling."""
-    headers = {
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/120.0.0.0 Safari/537.36"
-        ),
-        "Accept": "application/json, text/plain, */*",
-        "Referer": "https://hytl.tools/",
-        "Origin": "https://hytl.tools"
-    }
-
-    delay = 1.0  # initial backoff
-
-    for attempt in range(1, max_retries + 1):
-        try:
-            response = requests.get(
-                API_URL.format(name),
-                headers=headers,
-                timeout=8
-            )
-
-            if response.status_code == 200:
-                data = response.json()
-                return "✔️" if data.get("available") else "❌"
-
-            if response.status_code == 429:
-                print(f"⏳ {name} → rate limited (retry {attempt}/{max_retries}, waiting {delay:.1f}s)")
-                time.sleep(delay)
-                delay *= 2
-                continue
-
-            if response.status_code == 403:
-                print(f"🚫 {name} → temporarily blocked (cooling down 10s)")
-                time.sleep(10)
-                continue
-
+def check_name(name):
+    """Check availability of a username via the API."""
+    try:
+        response = requests.get(API_URL.format(name.strip()), timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            if data.get("available"):
+                return "✔️"
+            else:
+                return "❌"
+        else:
             return f"error {response.status_code}"
-
-        except requests.exceptions.RequestException as e:
-            print(f"⚠ {name} → network error ({e}), retrying in {delay:.1f}s")
-            time.sleep(delay)
-            delay *= 2
-
-    return "error (max retries)"
+    except requests.exceptions.RequestException as e:
+        return f"error {e}"
 
 def load_existing(file_path):
     """Load existing usernames from a file into a set."""
@@ -77,13 +47,14 @@ def load_existing(file_path):
     return set()
 
 def main():
+    # Verify the input file exists
     if not os.path.exists(FILE_PATH):
         print(f"File not found: {FILE_PATH}")
         return
 
+    # Read new usernames from file, normalize, filter out names <3 or >16 characters
     skipped = []
     new_lines = []
-
     with open(FILE_PATH, "r", encoding="utf-8") as f:
         for line in f:
             raw_name = line.strip()
@@ -96,42 +67,41 @@ def main():
             new_lines.append(name)
 
     if skipped:
-        print(f"⚠ Skipped {len(skipped)} invalid usernames: {', '.join(skipped)}")
+        print(f"⚠ Skipped {len(skipped)} usernames (too short, too long, or invalid chars): {', '.join(skipped)}")
 
     if not new_lines:
-        print("⚠ No valid usernames to check.")
+        print("⚠ No valid usernames to check (3–16 characters, letters/numbers/underscore only).")
         return
 
+    # Load existing results to avoid duplicates
     checked_names = load_existing(OUTPUT_FILE)
-    available_names = load_existing(AVAILABLE_FILE)
-    unavailable_names = load_existing(UNAVAILABLE_FILE)
+    available_names_existing = load_existing(AVAILABLE_FILE)
+    unavailable_names_existing = load_existing(UNAVAILABLE_FILE)
 
     output_lines = []
+    available_names = set(available_names_existing)
+    unavailable_names = set(unavailable_names_existing)
 
-    print(f"\n🔎 Checking {len(new_lines)} usernames...\n")
-
-    for idx, name in enumerate(new_lines, start=1):
-        if name in checked_names:
-            print(f"{idx}/{len(new_lines)}: {name} → already checked")
+    print(f"\n🔎 Checking {len(new_lines)} new usernames...\n")
+    for idx, line in enumerate(new_lines, start=1):
+        # Skip if already checked
+        if line in checked_names:
+            print(f"{idx}/{len(new_lines)}: {line} → already checked")
             continue
 
-        status = check_name(name)
-        output_lines.append(f"{name} ({status})")
+        status = check_name(line)
+        output_lines.append(f"{line} ({status})")
 
+        # Separate files
         if status == "✔️":
-            available_names.add(name)
+            available_names.add(line)
         elif status == "❌":
-            unavailable_names.add(name)
+            unavailable_names.add(line)
 
-        print(f"{idx}/{len(new_lines)}: {name} → {status}")
+        print(f"{idx}/{len(new_lines)}: {line} → {status}")
+        time.sleep(0.25)  # polite delay
 
-        time.sleep(0.25)  # base delay between names
-
-        # long cooldown every 100 requests (VERY IMPORTANT)
-        if idx % 100 == 0:
-            print("🛑 Cooling down for 30 seconds...")
-            time.sleep(30)
-
+    # Append new results to files
     if output_lines:
         with open(OUTPUT_FILE, "a", encoding="utf-8") as f:
             f.write("\n".join(output_lines) + "\n")
@@ -142,11 +112,11 @@ def main():
         with open(UNAVAILABLE_FILE, "w", encoding="utf-8") as f:
             f.write("\n".join(sorted(unavailable_names)) + "\n")
 
-    print("\n💠 DONE")
-    print("> Updated files:")
-    print(f"- {OUTPUT_FILE}")
-    print(f"- {AVAILABLE_FILE}")
-    print(f"- {UNAVAILABLE_FILE}")
+    print(f"\n💠 [DONE]")
+    print(f"\n> Updated files:")
+    print(f"- {OUTPUT_FILE} (Full List)")
+    print(f"- {AVAILABLE_FILE} (Available)")
+    print(f"- {UNAVAILABLE_FILE} (Unavailable)")
 
 if __name__ == "__main__":
     main()

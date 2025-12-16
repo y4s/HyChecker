@@ -10,8 +10,21 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 AVAILABLE_FILE = os.path.join(SCRIPT_DIR, "available_names.txt")
 UNAVAILABLE_FILE = os.path.join(SCRIPT_DIR, "unavailable_names.txt")
+
 TIMEOUT = 6
-DELAY_BETWEEN = 0.25  # polite delay
+DELAY_BETWEEN = 0.25  # polite delay between successful checks
+
+SESSION = requests.Session()
+SESSION.headers.update({
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/120.0.0.0 Safari/537.36"
+    ),
+    "Accept": "application/json, text/plain, */*",
+    "Referer": "https://hytl.tools/",
+    "Origin": "https://hytl.tools"
+})
 
 def load_set(path):
     """Load lines from a file into a set (stripped, non-empty)."""
@@ -40,7 +53,7 @@ def check_name_api(name):
 
     while retries < max_retries:
         try:
-            resp = requests.get(API_URL.format(name), timeout=TIMEOUT)
+            resp = SESSION.get(API_URL.format(name), timeout=TIMEOUT)
 
             # RATE LIMITED
             if resp.status_code == 429:

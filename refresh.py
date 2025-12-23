@@ -11,7 +11,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 AVAILABLE_FILE = os.path.join(SCRIPT_DIR, "available_names.txt")
 UNAVAILABLE_FILE = os.path.join(SCRIPT_DIR, "unavailable_names.txt")
 TIMEOUT = 6
-DELAY_BETWEEN = 0.25  # polite delay to avoid hammering the API
+DELAY_BETWEEN = 0.25
 
 def load_set(path):
     """Load lines from a file into a set (stripped, non-empty)."""
@@ -67,22 +67,18 @@ def main():
             still_available.append(name)
             print(" → (still available) ✔️")
         elif is_avail is False:
-            # move to unavailable
             if name not in unavailable_set:
                 unavailable_set.add(name)
                 moved_to_unavailable.append(name)
             print(" → (moved to unavailable) ❌")
         else:
-            # on error: keep the name in available list to try later
             still_available.append(name)
             print(" → check error, kept for later")
         time.sleep(DELAY_BETWEEN)
 
-    # Write updated files
     write_atomic(AVAILABLE_FILE, sorted(still_available))
     write_atomic(UNAVAILABLE_FILE, sorted(unavailable_set))
 
-    # Summary
     print("\nSummary:")
     print(f"  Checked: {len(available)}")
     print(f"  Still available: {len(still_available)} ✔️")
@@ -94,3 +90,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

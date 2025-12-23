@@ -6,13 +6,11 @@ import re
 
 API_URL = "https://api.hytl.tools/check/{}"
 
-# Use a file passed as argument or default to name.txt in script folder
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 FILE_PATH = os.path.join(SCRIPT_DIR, "name.txt")
 if len(sys.argv) > 1:
     FILE_PATH = sys.argv[1]
 
-# Output files
 OUTPUT_FILE = os.path.join(SCRIPT_DIR, "name_checked.txt")
 AVAILABLE_FILE = os.path.join(SCRIPT_DIR, "available_names.txt")
 UNAVAILABLE_FILE = os.path.join(SCRIPT_DIR, "unavailable_names.txt")
@@ -20,7 +18,6 @@ UNAVAILABLE_FILE = os.path.join(SCRIPT_DIR, "unavailable_names.txt")
 def normalize_name(name):
     """Normalize username: lowercase, remove spaces/dashes, keep only a-z, 0-9, underscore."""
     name = name.replace(" ", "").replace("-", "").lower()
-    # Keep only letters, digits, and underscore
     name = re.sub(r"[^a-z0-9_]", "", name)
     return name
 
@@ -47,12 +44,10 @@ def load_existing(file_path):
     return set()
 
 def main():
-    # Verify the input file exists
     if not os.path.exists(FILE_PATH):
         print(f"File not found: {FILE_PATH}")
         return
 
-    # Read new usernames from file, normalize, filter out names <3 or >16 characters
     skipped = []
     new_lines = []
     with open(FILE_PATH, "r", encoding="utf-8") as f:
@@ -73,7 +68,6 @@ def main():
         print("⚠ No valid usernames to check (3–16 characters, letters/numbers/underscore only).")
         return
 
-    # Load existing results to avoid duplicates
     checked_names = load_existing(OUTPUT_FILE)
     available_names_existing = load_existing(AVAILABLE_FILE)
     unavailable_names_existing = load_existing(UNAVAILABLE_FILE)
@@ -84,7 +78,6 @@ def main():
 
     print(f"\n🔎 Checking {len(new_lines)} new usernames...\n")
     for idx, line in enumerate(new_lines, start=1):
-        # Skip if already checked
         if line in checked_names:
             print(f"{idx}/{len(new_lines)}: {line} → already checked")
             continue
@@ -92,16 +85,14 @@ def main():
         status = check_name(line)
         output_lines.append(f"{line} ({status})")
 
-        # Separate files
         if status == "✔️":
             available_names.add(line)
         elif status == "❌":
             unavailable_names.add(line)
 
         print(f"{idx}/{len(new_lines)}: {line} → {status}")
-        time.sleep(0.25)  # polite delay
+        time.sleep(0.25)
 
-    # Append new results to files
     if output_lines:
         with open(OUTPUT_FILE, "a", encoding="utf-8") as f:
             f.write("\n".join(output_lines) + "\n")
@@ -120,3 +111,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

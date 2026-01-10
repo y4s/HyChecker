@@ -1,4 +1,4 @@
-<img width="160" height="160" alt="Logo" src="https://github.com/user-attachments/assets/56ad96f3-1d63-4f82-a8e5-ccf501cbbcaa" />
+<img width="160" height="160" alt="HyChecker Logo" src="https://github.com/user-attachments/assets/56ad96f3-1d63-4f82-a8e5-ccf501cbbcaa" />
 
 # HyChecker
 HyChecker is a Python script that allows you to check availability of multiple usernames with one click for the game [Hytale](https://hytale.com) by [Hypixel Studios](https://x.com/hypixel).

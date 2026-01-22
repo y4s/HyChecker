@@ -34,13 +34,13 @@ python -m pip install requests
 4. Modify `name.txt` by entering the usernames you're after & save the file <i>(examples are given within the file itself)</i>
 5. Run `hychecker.py`
 
-> If ran correctly, the files: <i>available_names.txt</i>, <i>unavailable_names.txt</i> and <i>name_checked.txt</i> should appear
+> If ran correctly, the files: <i>available_names.txt</i>, <i>unavailable_names.txt</i>, <i>reserved_names.txt</i> and <i>name_checked.txt</i> should appear
 
 #### VSCode Folder <br>
-<img width="172" height="134" alt="image" src="https://github.com/user-attachments/assets/6b605715-ca1d-4e05-97af-6fdf50bd36a4" />
+<img width="132" height="112" alt="image" src="https://github.com/user-attachments/assets/7f159f96-86a7-410d-b0e0-d91f1f6c5c37" />
 
 #### Search Summary <br>
-<img width="235" height="222" alt="image" src="https://github.com/user-attachments/assets/62c3e38e-690f-4f34-a550-b6bb5dd4a4c6" />
+<img width="228" height="118" alt="image" src="https://github.com/user-attachments/assets/e6396b0b-f79f-4f75-a4bb-0acf5f8b99f7" />
 
 
 ### 💡 Optional:

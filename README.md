@@ -46,7 +46,7 @@ python -m pip install requests
 ### 💡 Optional:
 1. Run `refresh.py` to see if the names you're after are still available
 
-> When ran, the list of names that are still available will remain in <i>available_names.txt</i>, otherwise moved to <i>unavailable_names.txt</i>
+> When ran, the list of names that are still available will remain in <i>available_names.txt</i>, otherwise moved to <i>unavailable_names.txt</i>.
 > When reserved names become availabe, it will be moved from <i>reserved_names.txt</i> to <i>available_names.txt</i>
 
 #### Refresh Summary <br>

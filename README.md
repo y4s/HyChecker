@@ -49,7 +49,7 @@ python -m pip install requests
 > When ran, the list of names that are still available will remain in <i>available_names.txt</i>, otherwise moved to <i>unavailable_names.txt</i>
 
 #### Refresh Summary <br>
-<img width="211" height="155" alt="image" src="https://github.com/user-attachments/assets/ded92eb7-427c-44fb-9505-f7d41a5761e7" />
+<img width="340" height="273" alt="image" src="https://github.com/user-attachments/assets/bc872e27-74ad-4ff2-9dd0-35c3fb927e08" />
 
 
 ---
